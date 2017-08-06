@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>com.neinzedd9.BlinkBadge</string>
+			<key>key</key>
+			<string>animationDuration</string>
+			<key>placeholder</key>
+			<string>Animation Duration (default = 0.7)</string>
+			<key>noAutoCorrect</key>
+			<true/>
+			<key>isDecimalPad</key>
+			<true/>
+			<key>keyboard</key>
+			<string>decimalpad</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>action</key>
+			<string>updateAnimation</string>
+			<key>label</key>
+			<string>Save Animation Duration</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+      <string>PSGroupCell</string>
+      <key>footerText</key>
+      <string>Notification icon by Thomas Helbig from the Noun Project</string>
+    </dict>
+		<dict>
+    	<key>big</key>
+    	<true/>
+    	<key>cellClass</key>
+    	<string>HBTwitterCell</string>
+    	<key>height</key>
+    	<integer>56</integer>
+    	<key>label</key>
+    	<string>NeinZedd9</string>
+    	<key>user</key>
+    	<string>neinzedd9</string>
+		</dict>
+		<dict>
+    <key>cellClass</key>
+    <string>HBLinkTableCell</string>
+    <key>icon</key>
+    <string>donation.png</string>
+    <key>label</key>
+    <string>Donations are appreciated! &lt;3</string>
+    <key>url</key>
+    <string>https://www.paypal.me/NeinZedd</string>
+	</dict>
+	</array>
+	<key>title</key>
+	<string>BlinkBadge</string>
+</dict>
+</plist>
