@@ -10,6 +10,21 @@ double animationDuration = 0.7;
 - (void)nz9_blinkbadge_animate;
 @end
 
+static void nz9_createTimer() {
+  timer = [NSTimer scheduledTimerWithTimeInterval: (animationDuration * 2)
+                                           target: [NSBlockOperation blockOperationWithBlock:^{
+                                             for(SBIconBadgeView *badge in badges) {
+                                              [badge nz9_blinkbadge_fadeInBadge];
+                                            }
+                                              if([badges count] == 0) {
+                                                [timer invalidate];
+                                                createdTimer = NO;
+                                              }}]
+                                         selector: @selector(main)
+                                         userInfo: nil
+                                          repeats: YES];
+}
+
 static void nz9_prefChanged() {
   if (settings) {
     [settings release];
@@ -21,18 +36,7 @@ static void nz9_prefChanged() {
 	animationDuration = [[settings objectForKey:@"animationDuration"] doubleValue];
 	if(createdTimer) {
 		[timer invalidate];
-		timer = [NSTimer scheduledTimerWithTimeInterval: (animationDuration * 2)
-																						 target: [NSBlockOperation blockOperationWithBlock:^{
-																							 for(SBIconBadgeView *badge in badges) {
-																						 		[badge nz9_blinkbadge_fadeInBadge];
-																						 	}
-																								if([badges count] == 0) {
-																									[timer invalidate];
-																									createdTimer = NO;
-																								}}]
-																					 selector: @selector(main)
-																					 userInfo: nil
-																					  repeats: YES];
+    nz9_createTimer();
 	}
 }
 
@@ -42,18 +46,7 @@ static void nz9_prefChanged() {
 	%orig;
 	[badges addObject: self];
 	if(!createdTimer) {
-		timer = [NSTimer scheduledTimerWithTimeInterval: (animationDuration * 2)
-																						 target: [NSBlockOperation blockOperationWithBlock:^{
-																							 for(SBIconBadgeView *badge in badges) {
-																						 		[badge nz9_blinkbadge_fadeInBadge];
-																						 	}
-																								if([badges count] == 0) {
-																									[timer invalidate];
-																									createdTimer = NO;
-																								}}]
-																					 selector: @selector(main)
-																					 userInfo: nil
-																					  repeats: YES];
+		nz9_createTimer();
 		createdTimer = YES;
 	}
 	return self;
@@ -82,6 +75,29 @@ static void nz9_prefChanged() {
 					}
 					completion: nil
 	];
+}
+
+%end
+
+%hook SBApplication
+
+- (void)willActivate {
+  %orig;
+  if(createdTimer) {
+    [timer invalidate];
+    createdTimer = NO;
+  }
+  for(SBIconBadgeView *badge in badges) {
+   [badge.layer removeAllAnimations];
+ }
+}
+
+- (void)willDeactivateForEventsOnly:(BOOL)arg1 {
+  %orig;
+  if(!createdTimer) {
+		nz9_createTimer();
+		createdTimer = YES;
+	}
 }
 
 %end
