@@ -1,7 +1,7 @@
 Package: com.neinzedd9.blinkbadge
 Name: BlinkBadge
 Depends: mobilesubstrate, ws.hbang.common, preferenceloader
-Version: 1.0.0
+Version: 1.0.2
 Architecture: iphoneos-arm
 Description: Makes app notification badges blink
 Maintainer: NeinZedd9
