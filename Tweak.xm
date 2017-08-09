@@ -103,9 +103,13 @@ static void nz9_prefChanged() {
                       initialSpringVelocity: 0
                       options: UIViewAnimationOptionCurveEaseOut
                       animations: ^{
-                        self.center = CGPointMake(originalCenter.x, originalCenter.y);
+                        self.center = originalCenter;
                       }
-                      completion: nil];
+                      completion: ^(BOOL finished) {
+                        self.center = originalCenter; // called when animation is cancelled and finished
+                      }];
+            } else {
+              self.center = originalCenter; // called when animation is canceclled
             }
           }];
 }
