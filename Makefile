@@ -2,7 +2,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = BlinkBadge
 BlinkBadge_FILES = Tweak.xm
-BlinkBadge_EXTRA_FRAMEWORKS += Cephei CepheiPrefs
+BlinkBadge_EXTRA_FRAMEWORKS += Cephei CepheiPrefs CoreGraphics UIKit
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
